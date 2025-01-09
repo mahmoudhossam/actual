@@ -10,7 +10,10 @@ import { Popover } from '@actual-app/components/popover';
 import { Text } from '@actual-app/components/text';
 import { View } from '@actual-app/components/view';
 
-import { pushModal } from 'loot-core/client/modals/modalsSlice';
+import {
+  type Modal as ModalType,
+  pushModal,
+} from 'loot-core/client/modals/modalsSlice';
 import { send } from 'loot-core/platform/client/fetch';
 
 import { useAuth } from '../../auth/AuthProvider';
@@ -27,11 +30,14 @@ import { Link } from '../common/Link';
 import { Modal, ModalCloseButton, ModalHeader } from '../common/Modal';
 import { useMultiuserEnabled } from '../ServerContext';
 
-type CreateAccountProps = {
-  upgradingAccountId?: string;
-};
+type CreateAccountModalProps = Extract<
+  ModalType,
+  { name: 'add-account' }
+>['options'];
 
-export function CreateAccountModal({ upgradingAccountId }: CreateAccountProps) {
+export function CreateAccountModal({
+  upgradingAccountId,
+}: CreateAccountModalProps) {
   const { t } = useTranslation();
 
   const syncServerStatus = useSyncServerStatus();
@@ -104,7 +110,7 @@ export function CreateAccountModal({ upgradingAccountId }: CreateAccountProps) {
         pushModal({
           name: 'select-linked-accounts',
           options: {
-            accounts: newAccounts,
+            externalAccounts: newAccounts,
             syncSource: 'simpleFin',
           },
         }),

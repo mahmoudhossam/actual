@@ -1882,7 +1882,7 @@ class AccountInternal extends PureComponent<
                       <EmptyMessage
                         onAdd={() =>
                           this.props.dispatch(
-                            replaceModal({ name: 'add-account' }),
+                            replaceModal({ name: 'add-account', options: {} }),
                           )
                         }
                       />
