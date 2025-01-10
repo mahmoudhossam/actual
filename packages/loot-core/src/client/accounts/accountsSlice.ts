@@ -8,7 +8,7 @@ import {
   type TransactionEntity,
   type SyncServerSimpleFinAccount,
 } from '../../types/models';
-import { addNotification } from '../actions';
+import { addNotification } from '../notifications/notificationsSlice';
 import {
   getAccounts,
   getPayees,
