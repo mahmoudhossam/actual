@@ -282,7 +282,9 @@ function SelectedTransactionsFloatingActionBar({
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setNotificationInset({ bottom: NOTIFICATION_BOTTOM_INSET }));
+    dispatch(
+      setNotificationInset({ inset: { bottom: NOTIFICATION_BOTTOM_INSET } }),
+    );
     return () => {
       dispatch(setNotificationInset(null));
     };
