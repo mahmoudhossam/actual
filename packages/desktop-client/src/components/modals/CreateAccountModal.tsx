@@ -108,10 +108,12 @@ export function CreateAccountModal({
 
       dispatch(
         pushModal({
-          name: 'select-linked-accounts',
-          options: {
-            externalAccounts: newAccounts,
-            syncSource: 'simpleFin',
+          modal: {
+            name: 'select-linked-accounts',
+            options: {
+              externalAccounts: newAccounts,
+              syncSource: 'simpleFin',
+            },
           },
         }),
       );
@@ -119,9 +121,11 @@ export function CreateAccountModal({
       console.error(err);
       dispatch(
         pushModal({
-          name: 'simplefin-init',
-          options: {
-            onSuccess: () => setIsSimpleFinSetupComplete(true),
+          modal: {
+            name: 'simplefin-init',
+            options: {
+              onSuccess: () => setIsSimpleFinSetupComplete(true),
+            },
           },
         }),
       );
@@ -133,9 +137,11 @@ export function CreateAccountModal({
   const onGoCardlessInit = () => {
     dispatch(
       pushModal({
-        name: 'gocardless-init',
-        options: {
-          onSuccess: () => setIsGoCardlessSetupComplete(true),
+        modal: {
+          name: 'gocardless-init',
+          options: {
+            onSuccess: () => setIsGoCardlessSetupComplete(true),
+          },
         },
       }),
     );
@@ -144,9 +150,11 @@ export function CreateAccountModal({
   const onSimpleFinInit = () => {
     dispatch(
       pushModal({
-        name: 'simplefin-init',
-        options: {
-          onSuccess: () => setIsSimpleFinSetupComplete(true),
+        modal: {
+          name: 'simplefin-init',
+          options: {
+            onSuccess: () => setIsSimpleFinSetupComplete(true),
+          },
         },
       }),
     );
@@ -181,7 +189,7 @@ export function CreateAccountModal({
   };
 
   const onCreateLocalAccount = () => {
-    dispatch(pushModal({ name: 'add-local-account' }));
+    dispatch(pushModal({ modal: { name: 'add-local-account' } }));
   };
 
   const { configuredGoCardless } = useGoCardlessStatus();
