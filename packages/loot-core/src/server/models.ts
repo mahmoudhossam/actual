@@ -86,9 +86,11 @@ export const categoryModel = {
     category: CategoryEntity,
     { update }: { update?: boolean } = {},
   ): DbCategory {
-    return update
-      ? convertForUpdate(schema, schemaConfig, 'categories', category)
-      : convertForInsert(schema, schemaConfig, 'categories', category);
+    return (
+      update
+        ? convertForUpdate(schema, schemaConfig, 'categories', category)
+        : convertForInsert(schema, schemaConfig, 'categories', category)
+    ) as DbCategory;
   },
   fromDb(category: DbCategory): CategoryEntity {
     return convertFromSelect(
@@ -119,14 +121,21 @@ export const categoryGroupModel = {
     categoryGroup: CategoryGroupEntity,
     { update }: { update?: boolean } = {},
   ): DbCategoryGroup {
-    return update
-      ? convertForUpdate(schema, schemaConfig, 'category_groups', categoryGroup)
-      : convertForInsert(
-          schema,
-          schemaConfig,
-          'category_groups',
-          categoryGroup,
-        );
+    return (
+      update
+        ? convertForUpdate(
+            schema,
+            schemaConfig,
+            'category_groups',
+            categoryGroup,
+          )
+        : convertForInsert(
+            schema,
+            schemaConfig,
+            'category_groups',
+            categoryGroup,
+          )
+    ) as DbCategoryGroup;
   },
   fromDb(
     categoryGroup: DbCategoryGroup & {
