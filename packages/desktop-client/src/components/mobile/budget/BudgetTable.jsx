@@ -1275,7 +1275,6 @@ function IncomeCategoryCells({ category, month, onBudgetAction }) {
 }
 
 function IncomeCategoryListItem({
-  category,
   month,
   style,
   onEdit,
@@ -1283,6 +1282,7 @@ function IncomeCategoryListItem({
   ...props
 }) {
   const listItemRef = useRef();
+  const { value: category } = props;
 
   return (
     <ListBoxItem
@@ -1617,7 +1617,7 @@ function IncomeCategoryList({
       {category => (
         <IncomeCategoryListItem
           key={category.id}
-          category={category}
+          value={category}
           month={month}
           style={{
             backgroundColor: monthUtils.isCurrentMonth(month)
