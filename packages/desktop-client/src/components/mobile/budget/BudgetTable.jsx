@@ -1533,40 +1533,6 @@ function IncomeGroup({
           onEditCategory={onEditCategory}
           onBudgetAction={onBudgetAction}
         />
-        {/* {group.categories
-          .filter(
-            category =>
-              !collapsed && (!category.hidden || showHiddenCategories),
-          )
-          .map((category, index) => {
-            return (
-              <IncomeCategory
-                key={category.id}
-                index={index}
-                category={category}
-                month={month}
-                type={type}
-                budgeted={
-                  type === 'report'
-                    ? trackingBudget.catBudgeted(category.id)
-                    : null
-                }
-                balance={
-                  type === 'report'
-                    ? trackingBudget.catSumAmount(category.id)
-                    : envelopeBudget.catSumAmount(category.id)
-                }
-                style={{
-                  backgroundColor: monthUtils.isCurrentMonth(month)
-                    ? theme.budgetCurrentMonth
-                    : theme.budgetOtherMonth,
-                }}
-                editMode={editMode}
-                onEdit={onEditCategory}
-                onBudgetAction={onBudgetAction}
-              />
-            );
-          })} */}
       </Card>
     </View>
   );
@@ -1611,6 +1577,7 @@ function IncomeCategoryList({
     onReorder(e) {
       const [key] = e.keys;
       const categoryIdToMove = key;
+      const categoryGroupId = categoryListData.getItem(key).cat_group;
       const targetCategoryId = e.target.key;
 
       if (e.target.dropPosition === 'before') {
@@ -1619,7 +1586,7 @@ function IncomeCategoryList({
         dispatch(
           moveCategory({
             id: categoryIdToMove,
-            groupId: categoryListData.getItem(categoryIdToMove).group,
+            groupId: categoryGroupId,
             targetId: targetCategoryId,
           }),
         );
@@ -1632,7 +1599,7 @@ function IncomeCategoryList({
         dispatch(
           moveCategory({
             id: categoryIdToMove,
-            groupId: categoryListData.getItem(categoryIdToMove).group,
+            groupId: categoryGroupId,
             // Due to the way `moveCategory` works, we use the category next to the
             // actual target category here because `moveCategory` always shoves the
             // category *before* the target category.
