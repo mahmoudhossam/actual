@@ -244,7 +244,7 @@ function TransactionListWithPreviews({
   const { t } = useTranslation();
   const baseTransactionsQuery = useCallback(
     () =>
-      queries.transactions(accountId).options({ splits: 'none' }).select('*'),
+      queries.transactions(accountId).options({ splits: 'all' }).select('*'),
     [accountId],
   );
 
@@ -357,7 +357,8 @@ function TransactionListWithPreviews({
   );
 
   const transactionsToDisplay = !isSearching
-    ? previewTransactions.concat(transactions)
+    ? // Do not render child transactions in the list, unless searching
+      previewTransactions.concat(transactions.filter(t => !t.is_child))
     : transactions;
 
   return (
